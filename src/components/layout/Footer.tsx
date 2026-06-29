@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ChevronRight, Facebook, Linkedin, Instagram } from 'lucide-react';
 
+const MAP_LINK = 'https://maps.app.goo.gl/YoAVGtmLRynd9zc7A';
+const MAP_EMBED_URL =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.437!2d31.25846435!3d30.05948845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583ef654293271%3A0xbdf810624782c0cc!2s37%20Abou%20Al%20Fawares!5e0!3m2!1sen!2seg!4v1730000000000!5m2!1sen!2seg';
+
 export default function Footer() {
   return (
     <footer className="bg-slate-900/95 backdrop-blur-xl text-slate-300 py-20 border-t border-white/10 relative overflow-hidden">
@@ -77,7 +81,14 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 group-hover:border-secondary/50 transition-colors">
                   <MapPin className="w-4 h-4 text-secondary" />
                 </div>
-                <span className="group-hover:text-white transition-colors pt-1 text-slate-400 leading-relaxed">37 Abo El Fawares St. Nasr City, Cairo, Egypt</span>
+                <a
+                  href={MAP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group-hover:text-white transition-colors pt-1 text-slate-400 leading-relaxed hover:underline underline-offset-2"
+                >
+                  37 Abo El Fawares St. Nasr City, Cairo, Egypt
+                </a>
               </li>
               <li className="flex items-center gap-4 text-sm group">
                 <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 group-hover:border-secondary/50 transition-colors">
@@ -99,19 +110,26 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-lg">
               Our Location
             </h3>
-            <div className="flex-1 min-h-[200px] rounded-2xl overflow-hidden border border-white/10 relative group shadow-[0_0_30px_rgba(0,0,0,0.3)]">
+            <a
+              href={MAP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Platinum Pharma location in Google Maps"
+              className="flex-1 min-h-[200px] rounded-2xl overflow-hidden border border-white/10 relative group shadow-[0_0_30px_rgba(0,0,0,0.3)] block"
+            >
               <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d221111.41164996964!2d31.11960251703623!3d30.05961847028784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate%2C%20Egypt!5e0!3m2!1sen!2sus!4v1713000000000!5m2!1sen!2sus" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(80%) grayscale(50%)' }} 
-                allowFullScreen={false} 
-                loading="lazy" 
+              <iframe
+                src={MAP_EMBED_URL}
+                title="Platinum Pharma office location on Google Maps"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(80%) grayscale(50%)' }}
+                allowFullScreen={false}
+                loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                className="absolute inset-0 transition-transform duration-700 group-hover:scale-110 pointer-events-none"
               />
-            </div>
+            </a>
           </div>
         </div>
 
