@@ -143,10 +143,15 @@ export default function Contact() {
                 </div>
               </div>
 
-              <button className="w-full flex items-center justify-center gap-3 px-8 py-5 rounded-2xl bg-[#25D366] text-white font-extrabold text-lg hover:bg-[#20bd5a] transition-all shadow-lg shadow-[#25D366]/30 hover:-translate-y-1">
+              <a
+                href="https://wa.me/201036969969"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-3 px-8 py-5 rounded-2xl bg-[#25D366] text-white font-extrabold text-lg hover:bg-[#20bd5a] transition-all shadow-lg shadow-[#25D366]/30 hover:-translate-y-1 cursor-pointer"
+              >
                 <MessageCircle size={24} />
                 Chat with us on WhatsApp
-              </button>
+              </a>
             </motion.div>
 
             {/* Contact Form */}
