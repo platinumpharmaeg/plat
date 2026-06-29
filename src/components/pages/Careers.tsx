@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import {
   Send,
@@ -193,6 +194,7 @@ function CheckboxGroup({
 }
 
 export default function Careers() {
+  const router = useRouter();
   const cvInputRef = useRef<HTMLInputElement>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState('');
@@ -203,8 +205,8 @@ export default function Careers() {
   const [accountTypes, setAccountTypes] = useState<string[]>([]);
   const [therapeuticAreas, setTherapeuticAreas] = useState<string[]>([]);
   const [consent, setConsent] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [candidateName, setCandidateName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const showFieldForceFields = FIELD_FORCE_DEPARTMENTS.includes(department);
 
@@ -229,26 +231,49 @@ export default function Careers() {
     if (cvInputRef.current) cvInputRef.current.value = '';
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError('');
+
     if (!cvFile) {
       setCvError('Please upload your CV.');
       return;
     }
     if (!consent) return;
 
-    const formData = new FormData(e.currentTarget);
-    setCandidateName(formData.get('fullName')?.toString() || 'Candidate');
-    setSubmitted(true);
-    e.currentTarget.reset();
-    clearCv();
-    setDepartment('');
-    setDrivingLicense('');
-    setHasCar('');
-    setPharmaExperience('');
-    setAccountTypes([]);
-    setTherapeuticAreas([]);
-    setConsent(false);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.set('cv', cvFile);
+
+    if (drivingLicense) formData.set('drivingLicense', drivingLicense);
+    if (hasCar) formData.set('hasCar', hasCar);
+    if (pharmaExperience) formData.set('pharmaExperience', pharmaExperience);
+    if (accountTypes.length) formData.set('accountTypes', accountTypes.join('||'));
+    if (therapeuticAreas.length) formData.set('therapeuticAreas', therapeuticAreas.join('||'));
+
+    const email = formData.get('email')?.toString() || '';
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/careers', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Unable to send your application right now.');
+      }
+
+      router.push(`/thank-you?form=careers&email=${encodeURIComponent(email)}`);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : 'Unable to send your application right now.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -382,32 +407,6 @@ export default function Careers() {
       <section id="submit-cv" className="scroll-mt-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Submit Your CV" />
-
-          {submitted && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 p-6 md:p-8 rounded-[2rem] bg-primary/10 border border-primary/20"
-            >
-              <h3 className="content-heading mb-3 text-primary-dark">
-                Your CV has been received — Platinum Pharma
-              </h3>
-              <p className="content-text mb-2">Dear {candidateName},</p>
-              <p className="content-text mb-2">
-                Thank you for submitting your CV to Platinum Pharma. Your application has been received
-                successfully. Our team will review your profile against current and future opportunities.
-              </p>
-              <p className="content-text">
-                If your experience matches a suitable role, we will contact you through our official
-                communication channels.
-              </p>
-              <p className="text-sm font-bold text-slate-700 mt-4">
-                Best regards,
-                <br />
-                Platinum Pharma Recruitment Team
-              </p>
-            </motion.div>
-          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -679,12 +678,17 @@ export default function Careers() {
                 </label>
               </div>
 
+              {submitError && (
+                <p className="text-sm font-medium text-red-500">{submitError}</p>
+              )}
+
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-dark text-white font-extrabold text-base md:text-lg hover:shadow-[0_0_25px_rgba(89,167,167,0.5)] transition-all duration-300 hover:-translate-y-1 border border-white/20"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-dark text-white font-extrabold text-base md:text-lg hover:shadow-[0_0_25px_rgba(89,167,167,0.5)] transition-all duration-300 hover:-translate-y-1 border border-white/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
                 <Send size={20} />
-                Submit Application
+                {isSubmitting ? 'Sending Application...' : 'Submit Application'}
               </button>
             </form>
           </motion.div>

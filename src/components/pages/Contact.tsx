@@ -1,12 +1,55 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
 import SectionTitle from '../shared/SectionTitle';
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError('');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: formData.get('name')?.toString() ?? '',
+      company: formData.get('company')?.toString() ?? '',
+      email: formData.get('email')?.toString() ?? '',
+      phone: formData.get('phone')?.toString() ?? '',
+      subject: formData.get('subject')?.toString() ?? '',
+      message: formData.get('message')?.toString() ?? '',
+    };
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Unable to send your message right now.');
+      }
+
+      router.push(`/thank-you?form=contact&email=${encodeURIComponent(payload.email)}`);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : 'Unable to send your message right now.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <div className="flex flex-col gap-24 pb-24">
@@ -122,7 +165,9 @@ export default function Contact() {
                     <label htmlFor="name" className="block text-sm font-bold text-slate-700 mb-2">Full Name</label>
                     <input 
                       type="text" 
-                      id="name" 
+                      id="name"
+                      name="name"
+                      required
                       className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium"
                       placeholder="John Doe"
                     />
@@ -131,7 +176,8 @@ export default function Contact() {
                     <label htmlFor="company" className="block text-sm font-bold text-slate-700 mb-2">Company</label>
                     <input 
                       type="text" 
-                      id="company" 
+                      id="company"
+                      name="company"
                       className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium"
                       placeholder="Your Company"
                     />
@@ -143,7 +189,9 @@ export default function Contact() {
                     <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
                     <input 
                       type="email" 
-                      id="email" 
+                      id="email"
+                      name="email"
+                      required
                       className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium"
                       placeholder="john@example.com"
                     />
@@ -152,7 +200,8 @@ export default function Contact() {
                     <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-2">Phone Number</label>
                     <input 
                       type="tel" 
-                      id="phone" 
+                      id="phone"
+                      name="phone"
                       className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium"
                       placeholder="+201036969969"
                     />
@@ -162,8 +211,11 @@ export default function Contact() {
                 <div>
                   <label htmlFor="subject" className="block text-sm font-bold text-slate-700 mb-2">Subject</label>
                   <select 
-                    id="subject" 
+                    id="subject"
+                    name="subject"
+                    required
                     className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium"
+                    defaultValue="Partnership Inquiry"
                   >
                     <option>Partnership Inquiry</option>
                     <option>Product Information</option>
@@ -174,19 +226,26 @@ export default function Contact() {
                 <div>
                   <label htmlFor="message" className="block text-sm font-bold text-slate-700 mb-2">Message</label>
                   <textarea 
-                    id="message" 
+                    id="message"
+                    name="message"
                     rows={5}
+                    required
                     className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium resize-none"
                     placeholder="How can we help you?"
                   ></textarea>
                 </div>
 
+                {submitError && (
+                  <p className="text-sm font-medium text-red-500">{submitError}</p>
+                )}
+
                 <button 
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-8 py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-dark text-white font-extrabold text-lg hover:shadow-[0_0_25px_rgba(89,167,167,0.5)] transition-all duration-300 hover:-translate-y-1 border border-white/20"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 px-8 py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-dark text-white font-extrabold text-lg hover:shadow-[0_0_25px_rgba(89,167,167,0.5)] transition-all duration-300 hover:-translate-y-1 border border-white/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
                   <Send size={20} />
-                  Send Message
+                  {isSubmitting ? 'Sending Message...' : 'Send Message'}
                 </button>
               </form>
             </motion.div>
