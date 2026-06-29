@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
 import SectionTitle from '../shared/SectionTitle';
+import { getApiUrl } from '@/lib/api-base';
 
 export default function Contact() {
   const router = useRouter();
@@ -30,7 +31,7 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(getApiUrl('/api/contact'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

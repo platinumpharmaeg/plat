@@ -2,8 +2,12 @@ import { Resend } from 'resend';
 
 let resendClient: Resend | null = null;
 
+function readEnv(name: string, fallback: string) {
+  return process.env[name]?.trim() || fallback;
+}
+
 export function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = readEnv('RESEND_API_KEY', '');
   if (!apiKey) {
     throw new Error('RESEND_API_KEY is not configured');
   }
@@ -16,11 +20,9 @@ export function getResendClient() {
 }
 
 export const emailConfig = {
-  from:
-    process.env.RESEND_FROM_EMAIL ??
-    'Platinum Pharma <noreply@platinumpharma-eg.com>',
-  careersTo: process.env.CAREERS_TO_EMAIL ?? 'Hr@platinumpharma-eg.com',
-  contactTo: process.env.CONTACT_TO_EMAIL ?? 'info@platinumpharma-eg.com',
+  from: readEnv('RESEND_FROM_EMAIL', 'Platinum Pharma <noreply@platinumpharma-eg.com>'),
+  careersTo: readEnv('CAREERS_TO_EMAIL', 'Hr@platinumpharma-eg.com'),
+  contactTo: readEnv('CONTACT_TO_EMAIL', 'info@platinumpharma-eg.com'),
 };
 
 export function buildCareersAutoReplyHtml(candidateName: string) {

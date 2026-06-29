@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const siteName = 'Platinum Pharma';
-export const siteUrl = 'https://plat-gamma.vercel.app';
+export const siteUrl = 'https://www.platinumpharma-eg.com';
 
 type CreateMetadataOptions = {
   title: string;

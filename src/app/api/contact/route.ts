@@ -5,6 +5,7 @@ import {
   escapeHtml,
   getResendClient,
 } from '@/lib/email';
+import { getCorsHeaders, jsonWithCors } from '@/lib/cors';
 
 export const runtime = 'nodejs';
 
@@ -16,6 +17,13 @@ type ContactPayload = {
   subject?: string;
   message?: string;
 };
+
+export async function OPTIONS(request: Request) {
+  return new NextResponse(null, {
+    status: 204,
+    headers: getCorsHeaders(request),
+  });
+}
 
 export async function POST(request: Request) {
   try {
@@ -29,11 +37,11 @@ export async function POST(request: Request) {
     const message = body.message?.trim() ?? '';
 
     if (!name || !email || !subject || !message) {
-      return NextResponse.json({ error: 'Please fill in all required fields.' }, { status: 400 });
+      return jsonWithCors(request, { error: 'Please fill in all required fields.' }, 400);
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+      return jsonWithCors(request, { error: 'Please enter a valid email address.' }, 400);
     }
 
     const resend = getResendClient();
@@ -61,9 +69,10 @@ export async function POST(request: Request) {
 
     if (result.error) {
       console.error('Contact email error:', result.error);
-      return NextResponse.json(
+      return jsonWithCors(
+        request,
         { error: 'Unable to send your message right now. Please try again later.' },
-        { status: 500 }
+        500
       );
     }
 
@@ -78,12 +87,13 @@ export async function POST(request: Request) {
       console.error('Contact auto-reply error:', autoReplyResult.error);
     }
 
-    return NextResponse.json({ success: true });
+    return jsonWithCors(request, { success: true });
   } catch (error) {
     console.error('Contact form error:', error);
-    return NextResponse.json(
+    return jsonWithCors(
+      request,
       { error: 'Unable to send your message right now. Please try again later.' },
-      { status: 500 }
+      500
     );
   }
 }

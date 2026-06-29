@@ -5,6 +5,7 @@ import {
   escapeHtml,
   getResendClient,
 } from '@/lib/email';
+import { getCorsHeaders, jsonWithCors } from '@/lib/cors';
 
 export const runtime = 'nodejs';
 
@@ -23,6 +24,13 @@ function getField(formData: FormData, key: string) {
 function getOptionalList(formData: FormData, key: string) {
   const value = getField(formData, key);
   return value ? value.split('||').filter(Boolean) : [];
+}
+
+export async function OPTIONS(request: Request) {
+  return new NextResponse(null, {
+    status: 204,
+    headers: getCorsHeaders(request),
+  });
 }
 
 export async function POST(request: Request) {
@@ -48,25 +56,26 @@ export async function POST(request: Request) {
     const cvFile = formData.get('cv');
 
     if (!fullName || !email || !mobile || !city || !degree || !university || !experience || !jobTitle || !department) {
-      return NextResponse.json({ error: 'Please fill in all required fields.' }, { status: 400 });
+      return jsonWithCors(request, { error: 'Please fill in all required fields.' }, 400);
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+      return jsonWithCors(request, { error: 'Please enter a valid email address.' }, 400);
     }
 
     if (!(cvFile instanceof File) || cvFile.size === 0) {
-      return NextResponse.json({ error: 'Please upload your CV.' }, { status: 400 });
+      return jsonWithCors(request, { error: 'Please upload your CV.' }, 400);
     }
 
     if (cvFile.size > MAX_CV_SIZE_BYTES) {
-      return NextResponse.json({ error: 'CV file size must be 5MB or less.' }, { status: 400 });
+      return jsonWithCors(request, { error: 'CV file size must be 5MB or less.' }, 400);
     }
 
     if (cvFile.type && !ALLOWED_CV_TYPES.has(cvFile.type)) {
-      return NextResponse.json(
+      return jsonWithCors(
+        request,
         { error: 'CV must be a PDF, DOC, or DOCX file.' },
-        { status: 400 }
+        400
       );
     }
 
@@ -118,9 +127,10 @@ export async function POST(request: Request) {
 
     if (hrResult.error) {
       console.error('Careers HR email error:', hrResult.error);
-      return NextResponse.json(
+      return jsonWithCors(
+        request,
         { error: 'Unable to send your application right now. Please try again later.' },
-        { status: 500 }
+        500
       );
     }
 
@@ -135,12 +145,13 @@ export async function POST(request: Request) {
       console.error('Careers auto-reply error:', autoReplyResult.error);
     }
 
-    return NextResponse.json({ success: true });
+    return jsonWithCors(request, { success: true });
   } catch (error) {
     console.error('Careers form error:', error);
-    return NextResponse.json(
+    return jsonWithCors(
+      request,
       { error: 'Unable to send your application right now. Please try again later.' },
-      { status: 500 }
+      500
     );
   }
 }
