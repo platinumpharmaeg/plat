@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { Target, Compass, Shield, Map, Activity, TrendingUp, Download } from 'lucide-react';
 import SectionTitle from '../shared/SectionTitle';
 
-const COMPANY_PROFILE_URL = 'https://twfik.com/platinum-pharma-profile.pdf';
+const COMPANY_PROFILE_URL = '/brochure/company-profile-final.pdf';
 
 function ProfileDownloadButton({ className = '' }: { className?: string }) {
   return (
