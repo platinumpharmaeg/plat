@@ -685,7 +685,7 @@ export default function Careers() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-dark text-white font-extrabold text-base md:text-lg hover:shadow-[0_0_25px_rgba(89,167,167,0.5)] transition-all duration-300 hover:-translate-y-1 border border-white/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-primary to-secondary-dark text-white font-extrabold text-base md:text-lg hover:shadow-[0_0_25px_rgba(89,167,167,0.5)] transition-all duration-300 hover:-translate-y-1 border border-white/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
                 <Send size={20} />
                 {isSubmitting ? 'Sending Application...' : 'Submit Application'}
