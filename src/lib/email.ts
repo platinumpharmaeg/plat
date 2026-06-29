@@ -2,8 +2,12 @@ import { Resend } from 'resend';
 
 let resendClient: Resend | null = null;
 
-function readEnv(name: string, fallback: string) {
+function readEnv(name: string, fallback = '') {
   return process.env[name]?.trim() || fallback;
+}
+
+export function isEmailConfigured() {
+  return Boolean(readEnv('RESEND_API_KEY'));
 }
 
 export function getResendClient() {

@@ -4,8 +4,8 @@ import {
   emailConfig,
   escapeHtml,
   getResendClient,
+  isEmailConfigured,
 } from '@/lib/email';
-import { getCorsHeaders, jsonWithCors } from '@/lib/cors';
 
 export const runtime = 'nodejs';
 
@@ -18,15 +18,15 @@ type ContactPayload = {
   message?: string;
 };
 
-export async function OPTIONS(request: Request) {
-  return new NextResponse(null, {
-    status: 204,
-    headers: getCorsHeaders(request),
-  });
-}
-
 export async function POST(request: Request) {
   try {
+    if (!isEmailConfigured()) {
+      return NextResponse.json(
+        { error: 'Email service is not configured on the server. Please contact the site administrator.' },
+        { status: 503 }
+      );
+    }
+
     const body = (await request.json()) as ContactPayload;
 
     const name = body.name?.trim() ?? '';
@@ -37,11 +37,11 @@ export async function POST(request: Request) {
     const message = body.message?.trim() ?? '';
 
     if (!name || !email || !subject || !message) {
-      return jsonWithCors(request, { error: 'Please fill in all required fields.' }, 400);
+      return NextResponse.json({ error: 'Please fill in all required fields.' }, { status: 400 });
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return jsonWithCors(request, { error: 'Please enter a valid email address.' }, 400);
+      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
     }
 
     const resend = getResendClient();
@@ -69,10 +69,9 @@ export async function POST(request: Request) {
 
     if (result.error) {
       console.error('Contact email error:', result.error);
-      return jsonWithCors(
-        request,
+      return NextResponse.json(
         { error: 'Unable to send your message right now. Please try again later.' },
-        500
+        { status: 500 }
       );
     }
 
@@ -87,13 +86,12 @@ export async function POST(request: Request) {
       console.error('Contact auto-reply error:', autoReplyResult.error);
     }
 
-    return jsonWithCors(request, { success: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Contact form error:', error);
-    return jsonWithCors(
-      request,
+    return NextResponse.json(
       { error: 'Unable to send your message right now. Please try again later.' },
-      500
+      { status: 500 }
     );
   }
 }

@@ -15,7 +15,6 @@ import {
   ArrowDown,
 } from 'lucide-react';
 import SectionTitle from '../shared/SectionTitle';
-import { getApiUrl } from '@/lib/api-base';
 
 const MAX_CV_SIZE_MB = 5;
 const CV_ACCEPTED_TYPES = '.pdf,.doc,.docx';
@@ -256,7 +255,7 @@ export default function Careers() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(getApiUrl('/api/careers'), {
+      const response = await fetch('/api/careers', {
         method: 'POST',
         body: formData,
       });
