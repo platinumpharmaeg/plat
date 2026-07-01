@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { siteImages } from '@/lib/images';
 
 export default function LoadingGate({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +38,7 @@ export default function LoadingGate({ children }: { children: React.ReactNode })
               className="relative z-10 flex flex-col items-center"
             >
               <motion.img
-                src="https://twfik.com/pplogo.png"
+                src={siteImages.logo}
                 alt="Platinum Pharma Logo"
                 className="w-72 md:w-[400px] h-auto mb-12 object-contain"
                 initial={{ filter: 'blur(8px)', opacity: 0 }}

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, AlignRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
+import { siteImages } from '@/lib/images';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -60,7 +61,7 @@ export default function Navbar() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              src="https://twfik.com/pplogo.png" 
+              src={siteImages.logo}
               alt="Platinum Pharma Logo" 
               className="h-16 md:h-20 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
               referrerPolicy="no-referrer"
@@ -152,7 +153,7 @@ export default function Navbar() {
                 }}
                 className="p-6 flex justify-between items-center border-b border-slate-100"
               >
-                <img src="https://twfik.com/pplogo.png" alt="Platinum Pharma" className="h-12 object-contain" />
+                <img src={siteImages.logo} alt="Platinum Pharma" className="h-12 object-contain" />
                 <button
                   className="p-2 text-slate-500 hover:text-primary transition-colors bg-slate-100/50 rounded-full"
                   onClick={() => setMobileMenuOpen(false)}

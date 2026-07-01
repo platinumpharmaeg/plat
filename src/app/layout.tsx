@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { siteName, siteUrl } from '@/lib/metadata';
+import { siteImages } from '@/lib/images';
 import LoadingGate from '@/components/LoadingGate';
 import SiteLayout from '@/components/layout/SiteLayout';
 import './globals.css';
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   description:
     'Platinum Pharma is a leading pharmaceutical company dedicated to providing high-quality healthcare solutions, innovative products, and trusted partnerships.',
   icons: {
-    icon: 'https://twfik.com/pplogo.png',
+    icon: siteImages.logo,
   },
 };
 

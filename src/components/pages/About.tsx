@@ -3,6 +3,7 @@
 import { motion } from 'motion/react';
 import { Target, Compass, Shield, Map, Activity, TrendingUp, Download } from 'lucide-react';
 import SectionTitle from '../shared/SectionTitle';
+import { siteImages } from '@/lib/images';
 
 const COMPANY_PROFILE_URL = '/brochure/company-profile-final.pdf';
 
@@ -79,7 +80,7 @@ export default function About() {
                 <div className="relative w-full max-w-[350px]">
                   <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                     <img 
-                      src="https://twfik.com/ceo-p.jpeg" 
+                      src={siteImages.ceo} 
                       alt="Dr. Ashraf Abdelaziz, Chief Executive Officer of Platinum Pharma" 
                       className="w-full h-full object-cover object-top"
                       referrerPolicy="no-referrer"
@@ -151,7 +152,7 @@ export default function About() {
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
               />
               <img 
-                src="https://twfik.com/pplogo.png" 
+                src={siteImages.logo}
                 alt="Platinum Pharma Logo" 
                 className="relative z-10 w-full h-auto max-h-[550px] object-contain drop-shadow-[0_20px_50px_rgba(89,167,167,0.4)] hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"

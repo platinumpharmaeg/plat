@@ -2,17 +2,18 @@
 
 import { motion } from 'motion/react';
 import SectionTitle from '../shared/SectionTitle';
+import { siteImages } from '@/lib/images';
 
 const partners = [
   {
     name: 'Anika',
-    logo: 'https://twfik.com/anika.png',
-    productImage: 'https://twfik.com/anikapro.png',
+    logo: siteImages.partners.anikaLogo,
+    productImage: siteImages.partners.anikaProducts,
   },
   {
     name: 'Desma',
-    logo: 'https://twfik.com/desmap.png',
-    productImage: 'https://twfik.com/desmaphr.png',
+    logo: siteImages.partners.desmaLogo,
+    productImage: siteImages.partners.desmaProducts,
   }
 ];
 

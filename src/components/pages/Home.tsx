@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, Users, Building2, Truck, Activity } from 'lucide-react';
 import SectionTitle from '../shared/SectionTitle';
+import { siteImages } from '@/lib/images';
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
         <motion.div className="absolute inset-0 z-0 overflow-hidden">
           {/* Desktop Background */}
           <motion.img 
-            src="https://twfik.com/newback.png" 
+            src={siteImages.homeBackground} 
             alt="Hero Background Desktop" 
             className="hidden md:block w-full h-full object-cover origin-center"
             animate={{ 
@@ -29,7 +30,7 @@ export default function Home() {
           />
           {/* Mobile Background */}
           <motion.img 
-            src="https://twfik.com/newback.png" 
+            src={siteImages.homeBackground} 
             alt="Hero Background Mobile" 
             className="block md:hidden w-full h-full object-cover origin-center"
             animate={{ 

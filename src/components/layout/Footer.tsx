@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ChevronRight, Facebook, Linkedin, Instagram } from 'lucide-react';
+import { siteImages } from '@/lib/images';
 
 const MAP_LINK = 'https://maps.app.goo.gl/YoAVGtmLRynd9zc7A';
 const MAP_EMBED_URL =
@@ -22,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-8">
             <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl inline-block border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:bg-white/10 transition-colors duration-500">
               <img 
-                src="https://twfik.com/pplogo.png" 
+                src={siteImages.logo}
                 alt="Platinum Pharma Logo" 
                 className="h-20 md:h-24 w-auto object-contain brightness-0 invert opacity-90"
                 referrerPolicy="no-referrer"
