@@ -16,7 +16,8 @@ export default function Home() {
           {/* Desktop Background */}
           <motion.img 
             src={siteImages.homeBackground} 
-            alt="Hero Background Desktop" 
+            alt="" 
+            aria-hidden="true"
             className="hidden md:block w-full h-full object-cover origin-center"
             animate={{ 
               scale: [1, 1.05, 1],
@@ -31,7 +32,8 @@ export default function Home() {
           {/* Mobile Background */}
           <motion.img 
             src={siteImages.homeBackground} 
-            alt="Hero Background Mobile" 
+            alt="" 
+            aria-hidden="true"
             className="block md:hidden w-full h-full object-cover origin-center"
             animate={{ 
               scale: [1, 1.05, 1],
