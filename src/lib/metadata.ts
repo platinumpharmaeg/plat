@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const siteName = 'Platinum Pharma';
-export const siteUrl = 'https://www.platinumpharma-eg.com';
+export const siteUrl = 'https://platinumpharma-eg.com';
 
 type CreateMetadataOptions = {
   title: string;
