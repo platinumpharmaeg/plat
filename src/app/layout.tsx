@@ -14,7 +14,9 @@ export const metadata: Metadata = {
   description:
     'Platinum Pharma is a leading pharmaceutical company dedicated to providing high-quality healthcare solutions, innovative products, and trusted partnerships.',
   icons: {
-    icon: siteImages.logo,
+    icon: [{ url: siteImages.favicon, type: 'image/png' }],
+    apple: siteImages.favicon,
+    shortcut: siteImages.favicon,
   },
 };
 

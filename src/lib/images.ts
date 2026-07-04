@@ -1,5 +1,6 @@
 export const siteImages = {
   logo: '/images/logo/pplogo.webp',
+  favicon: '/images/favicon.png',
   homeBackground: '/images/home/newback.webp',
   ceo: '/images/about/ceo-p.webp',
   partners: {
