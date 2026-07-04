@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   return createMetadata({
     title: `${product.name} - Platinum Pharma`,
-    description: `Learn more about ${product.name}, a high-quality ${product.area} product from ${product.partner}.`,
+    description: `Learn more about ${product.name}, a high-quality ${product.area} product distributed by Platinum Pharma in Egypt. Partner: ${product.partner}.`,
     path: `/products/${id}`,
   });
 }

@@ -4,8 +4,9 @@ import WhyUs from '@/components/pages/WhyUs';
 export const metadata = createMetadata({
   title: 'Why Choose Us',
   description:
-    'Discover the Platinum Advantage. Learn why Platinum Pharma is the preferred partner for healthcare solutions, offering quality, reliability, and innovation.',
-  keywords: 'Why Platinum Pharma, pharmaceutical advantage, healthcare partner, quality pharmaceuticals',
+    'Discover why Platinum Pharma is a preferred pharmaceutical partner in Egypt, offering quality products, reliable supply, and trusted healthcare solutions nationwide.',
+  keywords:
+    'Why Platinum Pharma Egypt, pharmaceutical advantage Cairo, healthcare partner Egypt, quality pharmaceuticals Egypt',
   path: '/why-us',
 });
 

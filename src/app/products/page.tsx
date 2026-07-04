@@ -4,9 +4,9 @@ import Products from '@/components/pages/Products';
 export const metadata = createMetadata({
   title: 'Our Products',
   description:
-    "Explore Platinum Pharma's extensive portfolio of high-quality pharmaceutical products, including Sterogyl 15, Dedrogyl, Monovisc, Orthovisc, and Cingal.",
+    "Explore Platinum Pharma Egypt's portfolio of high-quality pharmaceutical products, including Sterogyl 15, Dedrogyl, Monovisc, Orthovisc, and Cingal, available across Egypt.",
   keywords:
-    'Platinum Pharma products, Sterogyl 15, Dedrogyl, Monovisc, Orthovisc, Cingal, healthcare products, orthopedics',
+    'Platinum Pharma products Egypt, Sterogyl 15 Egypt, Dedrogyl, Monovisc, Orthovisc, Cingal, pharmaceuticals Cairo',
   path: '/products',
 });
 

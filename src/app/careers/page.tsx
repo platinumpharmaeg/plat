@@ -4,8 +4,9 @@ import Careers from '@/components/pages/Careers';
 export const metadata = createMetadata({
   title: 'Careers',
   description:
-    'Join Platinum Pharma. Explore career opportunities and submit your CV to become part of a healthcare company built on integrity and scientific excellence.',
-  keywords: 'Platinum Pharma careers, pharmaceutical jobs Egypt, medical sales jobs, healthcare careers',
+    'Join Platinum Pharma in Egypt. Explore pharmaceutical and healthcare career opportunities in Cairo and submit your CV to our HR team.',
+  keywords:
+    'Platinum Pharma careers Egypt, pharmaceutical jobs Cairo, medical sales jobs Egypt, healthcare careers Egypt',
   path: '/careers',
 });
 

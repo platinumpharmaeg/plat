@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { siteName, siteUrl } from '@/lib/metadata';
+import { siteDescription, siteName, siteUrl } from '@/lib/metadata';
 import { siteImages } from '@/lib/images';
 import { getSiteStructuredData } from '@/lib/structured-data';
 import LoadingGate from '@/components/LoadingGate';
@@ -13,8 +13,7 @@ export const metadata: Metadata = {
     default: `${siteName} - Advancing Healthcare Solutions`,
     template: `%s | ${siteName}`,
   },
-  description:
-    'Platinum Pharma is a leading pharmaceutical company dedicated to providing high-quality healthcare solutions, innovative products, and trusted partnerships.',
+  description: siteDescription,
   alternates: {
     canonical: siteUrl,
   },
@@ -22,10 +21,9 @@ export const metadata: Metadata = {
     type: 'website',
     siteName,
     title: `${siteName} - Advancing Healthcare Solutions`,
-    description:
-      'Platinum Pharma is a leading pharmaceutical company dedicated to providing high-quality healthcare solutions, innovative products, and trusted partnerships.',
+    description: siteDescription,
     url: siteUrl,
-    locale: 'en_US',
+    locale: 'en_EG',
   },
   icons: {
     icon: [{ url: siteImages.favicon, type: 'image/png' }],

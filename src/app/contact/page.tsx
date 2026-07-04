@@ -4,9 +4,9 @@ import Contact from '@/components/pages/Contact';
 export const metadata = createMetadata({
   title: 'Contact Us',
   description:
-    'Get in touch with Platinum Pharma. We are ready to assist you with partnership inquiries, product information, or general questions.',
+    'Contact Platinum Pharma in Cairo, Egypt. Reach our team for partnership inquiries, product information, and general questions about healthcare solutions in Egypt.',
   keywords:
-    'Contact Platinum Pharma, pharmaceutical contact, healthcare partnership, Platinum Pharma email, Platinum Pharma phone',
+    'Contact Platinum Pharma Egypt, pharmaceutical contact Cairo, healthcare partnership Egypt, Platinum Pharma phone Egypt',
   path: '/contact',
 });
 
