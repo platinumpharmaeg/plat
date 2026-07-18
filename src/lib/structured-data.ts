@@ -31,9 +31,9 @@ export function getSiteStructuredData() {
         url: siteUrl,
         logo: {
           '@type': 'ImageObject',
-          url: `${siteUrl}${siteImages.faviconPng}`,
-          width: 96,
-          height: 96,
+          url: `${siteUrl}${siteImages.faviconPng192}`,
+          width: 192,
+          height: 192,
         },
         description: siteDescription,
         address: {

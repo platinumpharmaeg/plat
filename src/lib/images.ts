@@ -2,6 +2,8 @@ export const siteImages = {
   logo: '/images/logo/pplogo.webp',
   favicon: '/favicon.ico',
   faviconPng: '/icon.png',
+  faviconPng48: '/favicon-48.png',
+  faviconPng192: '/icon-192.png',
   appleTouchIcon: '/apple-touch-icon.png',
   homeBackground: '/images/home/newback.webp',
   ceo: '/images/about/ceo-p.webp',
