@@ -26,8 +26,11 @@ export const metadata: Metadata = {
     locale: 'en_EG',
   },
   icons: {
-    icon: [{ url: siteImages.favicon, type: 'image/png' }],
-    apple: siteImages.favicon,
+    icon: [
+      { url: siteImages.favicon, sizes: '48x48' },
+      { url: siteImages.faviconPng, type: 'image/png', sizes: '96x96' },
+    ],
+    apple: siteImages.faviconPng,
     shortcut: siteImages.favicon,
   },
 };

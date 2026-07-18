@@ -29,7 +29,12 @@ export function getSiteStructuredData() {
         name: siteName,
         alternateName: ['Platinum Pharma Egypt', 'Platinum Pharma - Egypt'],
         url: siteUrl,
-        logo: `${siteUrl}${siteImages.favicon}`,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${siteUrl}${siteImages.faviconPng}`,
+          width: 96,
+          height: 96,
+        },
         description: siteDescription,
         address: {
           '@type': 'PostalAddress',
