@@ -2,6 +2,7 @@ export const siteImages = {
   logo: '/images/logo/pplogo.webp',
   favicon: '/favicon.ico',
   faviconPng: '/icon.png',
+  appleTouchIcon: '/apple-touch-icon.png',
   homeBackground: '/images/home/newback.webp',
   ceo: '/images/about/ceo-p.webp',
   partners: {

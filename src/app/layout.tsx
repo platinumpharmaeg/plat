@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       { url: siteImages.favicon, sizes: '48x48' },
       { url: siteImages.faviconPng, type: 'image/png', sizes: '96x96' },
     ],
-    apple: siteImages.faviconPng,
+    apple: siteImages.appleTouchIcon,
     shortcut: siteImages.favicon,
   },
 };
