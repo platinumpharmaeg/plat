@@ -117,7 +117,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="content-heading mb-2">Phone</h3>
-                    <p className="text-slate-600 font-medium">+201036969969</p>
+                    <p className="text-slate-600 font-medium">+201097737663</p>
                   </div>
                 </div>
 
@@ -144,7 +144,7 @@ export default function Contact() {
               </div>
 
               <a
-                href="https://wa.me/201036969969"
+                href="https://wa.me/201097737663"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-3 px-8 py-5 rounded-2xl bg-[#25D366] text-white font-extrabold text-lg hover:bg-[#20bd5a] transition-all shadow-lg shadow-[#25D366]/30 hover:-translate-y-1 cursor-pointer"
@@ -208,7 +208,7 @@ export default function Contact() {
                       id="phone"
                       name="phone"
                       className="w-full px-5 py-4 rounded-2xl border border-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all bg-white/60 shadow-sm font-medium"
-                      placeholder="+201036969969"
+                      placeholder="+201097737663"
                     />
                   </div>
                 </div>

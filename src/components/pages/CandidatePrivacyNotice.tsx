@@ -85,7 +85,7 @@ export default function CandidatePrivacyNotice() {
                 <br />
                 <strong>Email:</strong> info@platinumpharma-eg.com
                 <br />
-                <strong>Phone:</strong> +201036969969
+                <strong>Phone:</strong> +201097737663
               </p>
             </section>
 

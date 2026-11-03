@@ -95,7 +95,7 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 group-hover:border-secondary/50 transition-colors">
                   <Phone className="w-4 h-4 text-secondary" />
                 </div>
-                <span className="group-hover:text-white transition-colors text-slate-400">+201036969969</span>
+                <span className="group-hover:text-white transition-colors text-slate-400">+201097737663</span>
               </li>
               <li className="flex items-center gap-4 text-sm group">
                 <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 group-hover:border-secondary/50 transition-colors">

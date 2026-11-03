@@ -21,7 +21,7 @@ export const organizationGeo = {
   longitude: 31.25846435,
 } as const;
 
-export const organizationPhone = '+201036969969';
+export const organizationPhone = '+201097737663';
 export const organizationEmail = 'info@platinumpharma-eg.com';
 
 type CreateMetadataOptions = {
